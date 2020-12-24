@@ -67,6 +67,7 @@ e_col <- "#009e61"
 p_col <- "#E69F00"
 s_col <- "#FDE725FF"
 
+#' @import tibble
 
 renamekey <- tibble::tribble(
   ~goodname,
@@ -111,3 +112,46 @@ renamekey <- tibble::tribble(
   "adj_forborn_per"
 )
 
+
+recodeadjtable <- tibble::tribble(
+  ~ACS,
+  ~nicename,
+  "adj_poptotal",
+  "Population",
+  "adj_ageunder15_per",
+  "% under age 15",
+  "adj_age15_24_per",
+  "% age 15-24",
+  "adj_age25_64_per",
+  "% age 25-64",
+  "adj_age65up_per",
+  "% age 65+",
+  "adj_whitenh_per",
+  "% White",
+  "adj_blacknh_per",
+  "% Black",
+  "adj_asiannh_per",
+  "% Asian",
+  "adj_amindnh_per",
+  "% Am. Indian",
+  "adj_othermultinh_per",
+  "% Other + Multi",
+  "adj_hisppop_per",
+  "% Hispanic",
+  "adj_nothisppop_per",
+  "% not-Hispanic",
+  "adj_meanhhi",
+  "Mean household income",
+  "adj_novehicle_per",
+  "% Housholds without a vehicle",
+  "adj_lep_per",
+  "% speaking English less than very well",
+  "adj_span_per",
+  "% Spanish speakers",
+  "adj_anydis_per",
+  "Ability, % any disability",
+  "adj_usborn_per",
+  "Origin, % US-born",
+  "adj_forborn_per",
+  "Origin, % foreign-born"
+)
