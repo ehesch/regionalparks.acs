@@ -57,11 +57,7 @@ app_ui <- function(request) {
               "Weighted averages",
               mod_mod_summary_ggplot_ui("mod_summary_ggplot_ui_1")
             ),
-            # tabPanel(id="mytabsetpanel",
-            #          "lflt", 
-            #          mod_summary_map2_ui("summary_map2_ui_1")
-            # ),
-            # 
+
             tabPanel( id = "buffermap",
               "Buffer map",
               mod_summary_map_ui("summary_map_ui_1")
