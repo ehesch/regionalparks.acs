@@ -90,7 +90,6 @@ mod_mod_summary_ggplot_server <- function(input, output, session,
       (nrow(summary_util$plot_buffer_data[!duplicated(summary_util$plot_buffer_data[, c('name')]), ])*30)
     } else {200}
 
-    # return(nrow(summary_util$plot_buffer_data[!duplicated(summary_util$plot_buffer_data[, c('name')]), ])*30 + nrow(summary_util$plotly_agency_data)*30
   )
   )
   

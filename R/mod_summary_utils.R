@@ -26,11 +26,6 @@ mod_summary_utils_server <- function(input, output, session,
         type %in% selected_vars$input_type,
         distance == selected_vars$input_distance,
         status %in% selected_vars$input_status
-      ) %>%
-      separate(
-        name,
-        into = c("name", "delete2"),
-        sep = c("_")
       )  %>%
       left_join(renamekey, by = c("ACS" = "ACS")) %>%
       mutate(acs_short = stringr::str_remove(goodname, "% ")) %>%
@@ -86,17 +81,6 @@ mod_summary_utils_server <- function(input, output, session,
       ), 50))
   })
 
-
-  make_agencyavg_data <- reactive({
-    p3 <- regionalparks.acs::agency_avg %>%
-      dplyr::filter(
-        agency %in% selected_vars$input_agency,
-        ACS == selected_vars$input_acs
-      )
-    return(p3)
-  })
-
-
   make_facet_data = reactive({
     make_plotly_agency_data() %>% 
              mutate(level = 'Agency avg.',
@@ -105,8 +89,7 @@ mod_summary_utils_server <- function(input, output, session,
              bind_rows(make_plot_buffer_data() %>% 
                          mutate(level = "Unit values")) %>%
              pivot_wider(names_from = ACS, values_from = value) %>%
-             rename(value = starts_with("adj")) %>%
-      mutate(hovtext = paste0("Approx. ", .$value, "% of pple within", .$distance, " mi are"))
+             rename(value = starts_with("adj"))
     })
 
   
@@ -133,29 +116,9 @@ mod_summary_utils_server <- function(input, output, session,
     return(p5)
   })
 
-  # recode_bg_names <- tibble::tribble( # recode bg names ----
-  #   ~block_group_name, ~acs_selection,
-  #   "ageunder15_percent", "adj_ageunder15_per",
-  #   "age15_24_percent", "adj_age15_24_per",
-  #   "age25_64_percent", "adj_age25_64_per",
-  #   "age65up_percent", "adj_age65up_per",
-  #   "whitenh_percent", "adj_whitenh_per",
-  #   "blacknh_percent", "adj_blacknh_per",
-  #   "asiannh_percent", "adj_asiannh_per",
-  #   "amindnh_percent", "adj_amindnh_per",
-  #   "othermutltnh_percent", "adj_othermultinh",
-  #   "hisppop_percent", "adj_hisppop_per",
-  #   "nothisppop_percent", "adj_nothisppop_per",
-  #   "meanhhinc", "adj_meanhhi",
-  #   "novehicle_percent", "adj_novehicle_per",
-  #   "poorenglish_percent", "adj_lep_per",
-  #   "spanish_percent", "adj_span_per"
-  # )
-
 tractdata <- tibble(ACS = c("adj_anydis_per", "adj_forborn_per", "adj_usborn_per"))
   
   make_map_bg_data <- reactive({
-    # p6 <- regionalparks.acs::bg_geo[selected_vars$input_acs]
     p6 <- if (selected_vars$input_acs %in% tractdata$ACS) {
       regionalparks.acs::census_tract %>%
         mutate(disab_percent = `Disability, any disability`*100,
@@ -217,10 +180,6 @@ tractdata <- tibble(ACS = c("adj_anydis_per", "adj_forborn_per", "adj_usborn_per
   })
 
   observe({
-    vals$agencyavg_data <- make_agencyavg_data()
-  })
-
-  observe({
     vals$map_parktrail_data <- make_map_parktrail_data()
   })
 
@@ -228,10 +187,6 @@ tractdata <- tibble(ACS = c("adj_anydis_per", "adj_forborn_per", "adj_usborn_per
     vals$map_buffer_data <- make_map_buffer_data()
   })
 
-  # observe({
-  #   vals$plotly_buffer_data <- make_plotly_buffer_data()
-  # })
-  
   observe({
     vals$plotly_height <- nrow(make_plot_buffer_data())
   })
@@ -239,10 +194,6 @@ tractdata <- tibble(ACS = c("adj_anydis_per", "adj_forborn_per", "adj_usborn_per
   observe({
     vals$plotly_agency_data <- make_plotly_agency_data()
   })
-
-  # observe({
-  #   vals$plot_rawbuffer_data <- make_plot_rawbuffer_data()
-  # })
 
   observe({
     vals$map_bg_data <- make_map_bg_data()
