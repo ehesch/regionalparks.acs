@@ -42,3 +42,6 @@ golem::document_and_reload()
 
 # Run the application
 run_app()
+
+
+#reusing the mod of park/trail selections breaks the radio buttons :(

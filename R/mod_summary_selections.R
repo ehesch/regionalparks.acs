@@ -7,82 +7,6 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-# mod_summary_selections_ui <- function(id) {
-#   ns <- NS(id)
-#   tagList(
-#     # id = ns("sum_CHOICE"),
-#     h3("Select inputs "),
-#     # fluidPage(
-#     selectInput(
-#       ns("input_acs"),
-#       label = h5("ACS variable"),
-#       choices = list(
-#         `Age` = list(
-#           "Age, % under 15" = "adj_ageunder15_per",
-#           "Age, % 15-24" = "adj_age15_24_per",
-#           "Age, % 25-64" = "adj_age25_64_per",
-#           "Age, % 65+" = "adj_age65up_per"
-#         ),
-#         `Race` = list(
-#           "Race, % Am. Indian" = "adj_amindnh_per",
-#           "Race, % Asian" = "adj_asiannh_per",
-#           "Race, % Black" = "adj_blacknh_per",
-#           "Race, % Other + Multi" = "adj_othermultinh_per",
-#           "Race, % White" = "adj_whitenh_per"
-#         ),
-#         `Ethnicity` = list(
-#           "Ethnicity, % Hispanic" = "adj_hisppop_per",
-#           "Ethnicity, % not-Hispanic" = "adj_nothisppop_per"
-#         ),
-#         `Income` = list("Mean household income ($)" = "adj_meanhhi"),
-#         `Transportation` = list("% Housholds without a vehicle" = "adj_novehicle_per"),
-#         `Language` = list(
-#           "% speaking English less than very well" = "adj_lep_per",
-#           "% Spanish speakers" = "adj_span_per"
-#         )
-#       ),
-#       selected = "adj_ageunder15_per", selectize = F
-#     ),
-# 
-#     selectInput(
-#       ns("input_agency"),
-#       label = h5("Agenc(y/ies)"),
-#       choices = c(
-#         "Anoka County",
-#         "Bloomington",
-#         "Carver County",
-#         "Dakota County",
-#         "MPRB",
-#         "Ramsey County",
-#         "Scott County",
-#         "St. Paul",
-#         "Three Rivers",
-#         "Washington County"
-#       ),
-#       selected = "Anoka County",
-#       multiple = TRUE, selectize = T
-#     ),
-#     radioButtons(
-#       ns("input_distance"),
-#       label = h5("Buffer dist. (mi)"),
-#       choices = c(1.0, 1.5, 3),
-#       selected = c(1.0)
-#     ),
-#     checkboxGroupInput(
-#       ns("input_type"),
-#       label = h5("Unit Type"),
-#       choices = c("Park", "Trail"),
-#       selected = c("Park", "Trail")
-#     ),
-#     checkboxGroupInput(
-#       ns("input_status"),
-#       label = h5("Unit Status"),
-#       choices = c("Existing", "Planned", "Search"), # HTML("<strong>Existing</strong>") #something like this doesn't exist, but if these text colors could match point colors that would be great!
-#       selected = c("Existing", "Planned", "Search")
-#     )
-#   )
-# }
-
 
 # row
 mod_summary_selections_ui <- function(id) {
@@ -165,8 +89,8 @@ mod_summary_selections_ui <- function(id) {
       column(width=2,
              checkboxGroupInput(
                ns("input_status"),
-               label = h5("Status"),
-               choices = c("Existing", "Planned", "Search"), # HTML("<strong>Existing</strong>") #something like this doesn't exist, but if these text colors could match point colors that would be great!
+               label = h5("Status"), #"<div style='background-color:",background_color,"'>"
+               choices = c((paste0("<strong>", "Existing", "</strong>")), "Planned", "Search"), # HTML("<strong>Existing</strong>") #something like this doesn't exist, but if these text colors could match point colors that would be great!
                selected = c("Existing", "Planned", "Search")
              )))
   )
