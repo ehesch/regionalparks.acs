@@ -25,13 +25,16 @@ app_server <- function(input, output, session) {
   # ACS Map tab ----------------------------------------------------------------
   main_lft_inputs <- callModule(mod_leaflet_sidebar_server, "leaflet_sidebar_ui_1")
 
+  observe({print(main_lft_inputs$input_parktype)}) #to check that tract clicking is working
+  
   callModule(
     mod_main_leaflet_server,
     "main_leaflet_ui_1",
     main_lft_inputs,
     current_tab = input$nav
   )
-
+  
+  
   # ACS Summary tab ------------------------------------------------------------
   ## get input values
 

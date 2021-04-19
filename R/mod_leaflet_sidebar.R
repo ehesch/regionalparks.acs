@@ -211,9 +211,9 @@ mod_leaflet_sidebar_server <- function(input, output, session) {
     vals$map_bg_data_main <- make_map_bg_data_main()
   })
 
-  observe({
-    vals$map_parktrail_data_main <- make_map_parktrail_data_main()
-  })
+observe({
+  vals$map_parktrail_data_main <- make_map_parktrail_data_main()
+})
 
 
   observe({
